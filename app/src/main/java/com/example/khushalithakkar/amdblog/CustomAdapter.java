@@ -18,26 +18,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView newsimage1;
-        ImageView newsimage2;
-        ImageView more;
-        TextView newssub;
-        TextView time;
+        ImageView country_photo;
+
+       TextView newsname;
+
+        TextView admin;
         TextView news;
-        TextView newsname;
-        TextView intrest;
+
+
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            this.newsimage1 = (ImageView) itemView.findViewById(R.id.newsimage1);
-            this.newsimage2 = (ImageView) itemView.findViewById(R.id.newsimage2);
-            this.more = (ImageView) itemView.findViewById(R.id.more);
+           this.country_photo = (ImageView) itemView.findViewById(R.id.country_photo);
+
             this.newsname = (TextView) itemView.findViewById(R.id.newsname);
-            this.time = (TextView) itemView.findViewById(R.id.time);
+
+            this.admin = (TextView) itemView.findViewById(R.id.admin);
             this.news = (TextView) itemView.findViewById(R.id.news);
-            this.newssub = (TextView) itemView.findViewById(R.id.newssub);
-            this.intrest = (TextView) itemView.findViewById(R.id.intrest);
+
 
         }
     }
@@ -52,7 +51,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list, parent, false);
 
-        view.setOnClickListener(MainActivity.myOnClickListener);
+        view.setOnClickListener(NavigationFragment.myOnClickListener);
 
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
@@ -61,26 +60,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int listPosition) {
 
+        ImageView country_photo = holder.country_photo;
 
-
-        ImageView newsimage1 = holder.newsimage1 ;
-        ImageView newsimage2= holder.newsimage2;
-        ImageView more= holder.more;
-        TextView newssub= holder.newssub;
-        TextView time= holder.time;
-        TextView news= holder.news;
         TextView newsname = holder.newsname;
-        TextView intrest= holder.intrest;
 
-        newsimage1.setImageResource(dataSet.get(listPosition).getNewsimage1());
-        newsimage2.setImageResource(dataSet.get(listPosition).getNewsimage2());
-        more.setImageResource(dataSet.get(listPosition).getMore());
-        newssub.setText(dataSet.get(listPosition).getNewssub());
-        time.setText(dataSet.get(listPosition).getTime());
-        news.setText(dataSet.get(listPosition).getNews());
+        TextView admin = holder.admin;
+        TextView news= holder.news;
+
+        country_photo.setImageResource(dataSet.get(listPosition).getCountry_photo());
+
         newsname.setText(dataSet.get(listPosition).getNewsname());
-        intrest.setText(dataSet.get(listPosition).getIntrest());
 
+        admin.setText(dataSet.get(listPosition).getAdmin());
+        news.setText(dataSet.get(listPosition).getNews());
 
     }
 
