@@ -1,9 +1,11 @@
 package com.example.khushalithakkar.amdblog;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,8 +17,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.widget.LikeView;
+
+
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,17 +45,30 @@ public class NavigationFragment extends Fragment {
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
-     static ArrayList<Bean> Bean;
+    static ArrayList<Bean> Bean;
     static View.OnClickListener myOnClickListener;
-ViewPager mViewPager;
+    ViewPager mViewPager;
 
     int count;
     Timer timer1 = new Timer();
+
+    private CallbackManager callbackManager;
+
+
 
     public NavigationFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+
+        // Create a callbackManager to handle the login responses.
+        callbackManager = CallbackManager.Factory.create();
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +77,10 @@ ViewPager mViewPager;
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
 
 
-          mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
+
+        mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
         ImageAdapter adapterView = new ImageAdapter(getActivity());
+
 
 
         timer1.schedule(new TimerTask() {
@@ -103,8 +133,25 @@ ViewPager mViewPager;
         recyclerView.setAdapter(adapter);
         return view;
 
+
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setLikeButton(view);
+    }
+
+    private void setLikeButton(View view) {
+        LikeView likeView = (LikeView) view.findViewById(R.id.likeView);
+        likeView.setLikeViewStyle(LikeView.Style.STANDARD);
+        likeView.setFragment(this);
+        likeView.setAuxiliaryViewPosition(LikeView.AuxiliaryViewPosition.INLINE);
+
+        String pageUrlToLike = "http://amdavadblogs.apps-1and1.com";
+        likeView.setObjectIdAndType(pageUrlToLike, LikeView.ObjectType.PAGE);
+
+    }
 
     class MyOnClickListener implements View.OnClickListener {
 
@@ -128,6 +175,15 @@ ViewPager mViewPager;
             ft.commit();
         }
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Handle Facebook Login Result
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 
 }

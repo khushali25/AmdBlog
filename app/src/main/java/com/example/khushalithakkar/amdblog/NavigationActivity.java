@@ -1,11 +1,16 @@
 package com.example.khushalithakkar.amdblog;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 public class NavigationActivity extends AppCompatActivity
@@ -54,6 +61,7 @@ public class NavigationActivity extends AppCompatActivity
         ft.replace(R.id.frcontent, nf);
         ft.commit();
     }
+
 
     private void shareIt() {
     //sharing implementation here
