@@ -7,15 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
-    card_view:cardCornerRadius="18dp"
+    card_view:cardElevation="7dp"
     android:layout_marginBottom="16dp">
 
 
     <ImageView
         android:id="@+id/country_photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-
+        android:layout_height="190dp"
+        android:alpha="0.9"
         android:layout_centerInParent="true"
         android:src="@drawable/bg"
         android:scaleType="centerCrop" />
@@ -31,16 +31,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Explore Amdavad"
-            android:drawableLeft="@drawable/cat1"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:drawableLeft="@drawable/home"
+            android:textSize="15dp"
+
             android:paddingLeft="10dp"
-            android:textColor="@color/cardview_dark_background"
+
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="138dp">
+    <TextView
+        android:id="@+id/news"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="bottom"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:background="#70000000"
+        android:text="Montral Opens first icecream shop"
+        android:textColor="#fff"
+        android:layout_centerInParent="true"
+
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
         android:layout_marginTop="240dp"
         >
 
@@ -49,8 +69,6 @@
             android:layout_width="wrap_content"
             android:lineSpacingExtra="3dp"
             android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="@color/cardview_dark_background"
             android:layout_height="wrap_content"
             android:paddingTop="6dp"
             android:paddingLeft="10dp"
@@ -58,39 +76,19 @@
             android:text="Admin_AmdavadBlogs"
            />
 
-        <Button
-            android:layout_width="130dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_height="40dp"
-            android:text="Read More"
+            android:layout_height="wrap_content"
+            android:text="1 day ago"
+            android:lineSpacingExtra="3dp"
+            android:textSize="15dp"
+            android:drawableLeft="@drawable/clock"
             android:id="@+id/btnread"
-            android:background="#F7DC6F"
-            android:textColor="#DC7633"
-            android:layout_marginBottom="10dp"
-            android:drawableRight="@drawable/arrow"
+
+
+
             />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="150dp">
-    <TextView
-        android:id="@+id/news"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="bottom"
-        android:textSize="21sp"
-
-        android:paddingLeft="10dp"
-        android:background="#70000000"
-
-        android:text="Montral Opens first icecream shop"
-        android:textColor="#ffff"
-
-        android:layout_centerInParent="true"
-
-        />
     </LinearLayout>
 
 

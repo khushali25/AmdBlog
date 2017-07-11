@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,11 +32,10 @@ public class NavigationFragment extends Fragment {
     private static RecyclerView recyclerView;
      static ArrayList<Bean> Bean;
     static View.OnClickListener myOnClickListener;
+ViewPager mViewPager;
 
-    int noofsize = 5;
-    ViewPager myPager = null;
-    int count = 0;
-    Timer timer;
+    int count;
+    Timer timer1 = new Timer();
 
     public NavigationFragment() {
         // Required empty public constructor
@@ -49,8 +49,33 @@ public class NavigationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
 
 
-        final ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
-        ImageAdapter adapterView = new ImageAdapter(getContext());
+          mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
+        ImageAdapter adapterView = new ImageAdapter(getActivity());
+
+
+        timer1.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (count < 2) {
+                            mViewPager.setCurrentItem(count);
+                            count++;
+                        } else {
+                            count = 0;
+                            mViewPager.setCurrentItem(count);
+                        }
+                    }
+                });
+            }
+
+            private void runOnUiThread(Runnable runnable) {
+            }
+
+
+        }, 500, 2000);
+
         mViewPager.setAdapter(adapterView);
 
         myOnClickListener = new MyOnClickListener(getFragmentManager());
@@ -72,35 +97,12 @@ public class NavigationFragment extends Fragment {
                     MyData.NEWS[i]
             ));
         }
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (count <= 4) {
-                            mViewPager.setCurrentItem(count);
-                            count++;
-                        } else {
-                            count = 0;
-                            mViewPager.setCurrentItem(count);
-                        }
-                    }
-                });
-            }
-
-           
-        }, 500, 2000);
 
 
         adapter = new CustomAdapter(Bean);
         recyclerView.setAdapter(adapter);
         return view;
 
-    }
-
-    private void runOnUiThread(Runnable runnable) {
     }
 
 
@@ -116,8 +118,14 @@ public class NavigationFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(),PostDetail.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(),PostDetail.class);
+//            startActivity(intent);
+
+            PostDetailFragment pf = new PostDetailFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent, pf);
+            ft.addToBackStack(null);
+            ft.commit();
         }
     }
 

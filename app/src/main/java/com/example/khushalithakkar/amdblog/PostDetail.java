@@ -3,7 +3,7 @@ package com.example.khushalithakkar.amdblog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class PostDetail extends AppCompatActivity {
+public class PostDetail extends NavigationActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

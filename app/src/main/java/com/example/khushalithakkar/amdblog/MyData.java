@@ -14,8 +14,8 @@ public class MyData {
 
     static String[] ADMIN = {"Admin_amdavadblogs","Admin_amdavadblogs","Admin_amdavadblogs"};
     static String[] NEWS = {"Montreal Opens First-Ever Vegan Ice Cream Shop",
-            "Montreal Opens First-Ever Vegan Ice Cream Shop",
-            "Montreal Opens First-Ever Vegan Ice Cream Shop"};
+            "Montreal's Belmont Park Is Back",
+            "You Can Now Get \"Watermelon Bowl\" Ice Cream In Montreal"};
     //static String[] NEWSSUB = {"If you know me at all, then you probably know that I'm not a vegan. ","If you know me at all, then you probably know that I'm not a vegan.",
             //"If you know me at all, then you probably know that I'm not a vegan."};
     //static String[] INTREST = {"You've shown interest in iPhone","You've shown interest in iPhone","You've shown interest in iPhone"};

@@ -32,8 +32,9 @@ public class NavigationActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                shareIt();
             }
         });
 
@@ -52,6 +53,15 @@ public class NavigationActivity extends AppCompatActivity
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frcontent, nf);
         ft.commit();
+    }
+
+    private void shareIt() {
+    //sharing implementation here
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amdavad Blogs");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Now follow latest blogs with Amdavad Blogs click here to visit http://amdavadblogs.apps-1and1.com/ ");
+        startActivity(Intent.createChooser(sharingIntent, "Share via"));
     }
 
     @Override

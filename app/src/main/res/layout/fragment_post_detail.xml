@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_post_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backk"
+    tools:context="com.example.khushalithakkar.amdblog.PostDetail">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+
+                android:id="@+id/cover"
+                android:layout_width="match_parent"
+                android:layout_height="230dp">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
+                    android:scaleType="centerCrop"
+                    android:id="@+id/imageView" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="190dp"
+                android:orientation="vertical"
+                android:background="#FDFEFE"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:elevation="8dp"
+
+                android:layout_marginBottom="10dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/blogcat"
+                    android:text="Explore Amdavad"
+                    android:textColor="#48C9B0"
+                    />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/blogtime"
+                    android:text="1 day ago"
+                    android:textColor="#48C9B0"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginTop="-18dp"
+                    android:drawableLeft="@drawable/clock"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/blogtime"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20dp"
+                    android:textColor="#2980B9"
+                    android:text="Montreal Opens First Ice Cream Shop..." />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/blogtext1"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="15dp"
+
+                    android:text="If you know me at all, then you probably know that I’m not a vegan. While I do respect the lifestyle, and try to make vegan decisions as much as possible, I’d be lying if I said I’m totally, 110% vegan.
+
+READ ALSO:The Insane Bike Path On Water Near Montreal That You Must Experience
+
+But like I said, I do try to make vegan food choices as much as possible… and I do get super excited whenever something cool, new, and vegan comes out in Montreal.Just like Hoche Glace (2225 Avenue Bennett), a new ice cream spot in Montreal’s Hochelaga-Maisonneuve." />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/icecream"
+                    android:scaleType="centerCrop"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/blogtext2"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="15dp"
+
+                    android:text="This new shop is already making waves for their delicious and super high-quality ice cream… but that’s not the only appeal of this spot, friends.
+They also happen to serve some of the tastiest vegan ice cream in the whole city, guys.
+
+Not only is the soft-serve ice cream itself vegan, but you can also dip it into vegan chocolate, and then grab some vegan sorbet to top it off.
+
+
+
+Or, if vegan soft-serve dipped into vegan chocolate and topped off with some vegan sorbet isn’t your jam, worry not." />
+
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/iceceam1"
+                    android:scaleType="centerCrop"
+                    />
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft="200dp"
+                    android:layout_marginTop="-190dp"
+                    android:paddingRight="10dp"
+                    android:background="@drawable/icecream2"
+                    android:scaleType="centerCrop"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

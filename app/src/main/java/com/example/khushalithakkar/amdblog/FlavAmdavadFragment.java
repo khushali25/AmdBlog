@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,9 +45,9 @@ public class FlavAmdavadFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_flav_amdavad, container, false);
 
 
-        final ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid1);
-        ImageAdapter adapterView = new ImageAdapter(getContext());
-        mViewPager.setAdapter(adapterView);
+//        final ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid1);
+//        ImageAdapter adapterView = new ImageAdapter(getContext());
+//        mViewPager.setAdapter(adapterView);
 
         myOnClickListener = new FlavAmdavadFragment.MyOnClickListener(getFragmentManager());
 
@@ -67,26 +68,6 @@ public class FlavAmdavadFragment extends Fragment {
                     MyData.NEWS[i]
             ));
         }
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (count <= 4) {
-                            mViewPager.setCurrentItem(count);
-                            count++;
-                        } else {
-                            count = 0;
-                            mViewPager.setCurrentItem(count);
-                        }
-                    }
-                });
-            }
-
-
-        }, 500, 2000);
 
 
         adapter = new CustomAdapter(Bean);
@@ -111,8 +92,14 @@ public class FlavAmdavadFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(),PostDetail.class);
-            startActivity(intent);
+//            Intent intent = new Intent(getActivity(),PostDetail.class);
+//            startActivity(intent);
+
+            PostDetailFragment pf = new PostDetailFragment();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent, pf);
+            ft.addToBackStack(null);
+            ft.commit();
         }
     }
 
