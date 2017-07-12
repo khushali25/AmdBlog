@@ -5,9 +5,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +18,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -36,11 +40,13 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static android.R.attr.fragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NavigationFragment extends Fragment {
+public class NavigationFragment extends Fragment{
 
     private static RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -76,12 +82,8 @@ public class NavigationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
 
-
-
         mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
         ImageAdapter adapterView = new ImageAdapter(getActivity());
-
-
 
         timer1.schedule(new TimerTask() {
             @Override
@@ -169,13 +171,15 @@ public class NavigationFragment extends Fragment {
 //            startActivity(intent);
 
             PostDetailFragment pf = new PostDetailFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.frcontent, pf);
-            ft.addToBackStack(null);
+            android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.add(R.id.frcontent,pf,"PostDetailFragment");
+            ft.addToBackStack("PostDetailFragment");
             ft.commit();
+
+//            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//            fragmentManager.beginTransaction().add(R.id.frcontent, pf).commit();
         }
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -183,7 +187,4 @@ public class NavigationFragment extends Fragment {
         // Handle Facebook Login Result
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
 }

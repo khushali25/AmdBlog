@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homenav"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/home2">
+    </item>
+    <item
+        android:id="@+id/flavofamd"
+
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/flav2">
+    </item>
+    <item
+        android:id="@+id/newsamd"
+
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/news4">
+    </item>
+    <item
+        android:id="@+id/exploreamd"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/explore2">
+    </item>
+    <item
+        android:id="@+id/thingsamd"
+
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/things1">
+    </item>
+</menu>

@@ -97,8 +97,8 @@ public class FlavAmdavadFragment extends Fragment {
 
             PostDetailFragment pf = new PostDetailFragment();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.frcontent, pf);
-            ft.addToBackStack(null);
+            ft.add(R.id.frcontent,pf,"PostDetailFragment");
+            ft.addToBackStack("PostDetailFragment");
             ft.commit();
         }
     }

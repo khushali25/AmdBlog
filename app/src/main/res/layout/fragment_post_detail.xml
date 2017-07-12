@@ -138,11 +138,21 @@ Or, if vegan soft-serve dipped into vegan chocolate and topped off with some veg
                     android:background="@drawable/icecream2"
                     android:scaleType="centerCrop"
                     />
+                <LinearLayout
+                    android:id="@+id/youtube_layout"
+                    android:layout_width="255dp"
+                    android:layout_height="270dp"
+                    android:visibility="visible"
+                    android:orientation="horizontal" />
+
             </LinearLayout>
 
 
+
         </RelativeLayout>
+
     </ScrollView>
+
 
 
 </RelativeLayout>
