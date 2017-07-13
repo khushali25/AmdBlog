@@ -26,31 +26,40 @@
             android:title="Things to do"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Support">
         <menu>
 
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="About Amdavad Blog" />
+                android:icon="@drawable/about"
+                android:title="About Us" />
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/contact"
                 android:title="Contact Us" />
 
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Subscribe" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+
         </menu>
     </item>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/feedback"
+                android:icon="@drawable/feedback"
+                android:title="Feedback" />
+            <item
+                android:id="@+id/subscribe"
+                android:icon="@drawable/subscribe"
+                android:title="Subscribe" />
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/share"
+                android:title="Share" />
+            <item
+                android:id="@+id/rateus"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Rate Us" />
 
+        </menu>
+        </item>
 </menu>

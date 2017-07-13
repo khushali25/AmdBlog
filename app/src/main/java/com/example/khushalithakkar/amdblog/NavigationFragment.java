@@ -1,19 +1,10 @@
 package com.example.khushalithakkar.amdblog;
-
-
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,24 +12,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.facebook.share.widget.LikeView;
-
-
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 
 import static android.R.attr.fragment;
 
@@ -54,13 +34,8 @@ public class NavigationFragment extends Fragment{
     static ArrayList<Bean> Bean;
     static View.OnClickListener myOnClickListener;
     ViewPager mViewPager;
-
     int count;
-    Timer timer1 = new Timer();
-
     private CallbackManager callbackManager;
-
-
 
     public NavigationFragment() {
         // Required empty public constructor
@@ -81,34 +56,12 @@ public class NavigationFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_navigation, container, false);
-
         mViewPager = (ViewPager) view.findViewById(R.id.viewPageAndroid);
         ImageAdapter adapterView = new ImageAdapter(getActivity());
-
-        timer1.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (count < 2) {
-                            mViewPager.setCurrentItem(count);
-                            count++;
-                        } else {
-                            count = 0;
-                            mViewPager.setCurrentItem(count);
-                        }
-                    }
-                });
-            }
-
-            private void runOnUiThread(Runnable runnable) {
-            }
-
-
-        }, 500, 2000);
-
         mViewPager.setAdapter(adapterView);
+
+        Timer timer1 = new Timer();
+        timer1.scheduleAtFixedRate(new MyTimerTask(),500,2000);
 
         myOnClickListener = new MyOnClickListener(getFragmentManager());
 
@@ -117,9 +70,7 @@ public class NavigationFragment extends Fragment{
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-
         Bean = new ArrayList<Bean>();
-
 
         for (int i = 0; i < MyData.NEWS.length; i++) {
             Bean.add(new Bean(
@@ -130,14 +81,34 @@ public class NavigationFragment extends Fragment{
             ));
         }
 
-
         adapter = new CustomAdapter(Bean);
         recyclerView.setAdapter(adapter);
         return view;
-
-
     }
 
+    public class MyTimerTask extends TimerTask{
+
+        @Override
+        public void run() {
+            if(getActivity() == null)
+                return;
+
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (count <= 2) {
+                          mViewPager.setCurrentItem(count);
+                            count++;
+                        } else {
+                            count = 0;
+                            mViewPager.setCurrentItem(count);
+                        }
+                }
+            });
+
+        }
+    }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

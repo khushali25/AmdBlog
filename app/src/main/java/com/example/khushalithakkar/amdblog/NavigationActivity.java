@@ -1,8 +1,11 @@
 package com.example.khushalithakkar.amdblog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -14,21 +17,31 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import angtrim.com.fivestarslibrary.FiveStarsDialog;
+import angtrim.com.fivestarslibrary.NegativeReviewListener;
+import angtrim.com.fivestarslibrary.ReviewListener;
 
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NegativeReviewListener, ReviewListener {
 
     private Fragment fragment;
     private FragmentManager fragmentManager;
     private PopupMenu popupMenu;
+    EditText feedback;
+   // EditText youremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +55,7 @@ public class NavigationActivity extends AppCompatActivity
                 .replace(R.id.frcontent, fragment1)
                 .addToBackStack(null)
                 .commit();
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -69,6 +83,7 @@ public class NavigationActivity extends AppCompatActivity
                     case R.id.thingsamd:
                         fragment = new FlavAmdavadFragment();
                         break;
+
                 }
                 final FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.add(R.id.frcontent,fragment).commit();
@@ -145,13 +160,84 @@ public class NavigationActivity extends AppCompatActivity
         if (id == R.id.share) {
             shareIt();
         }
-//        if (id == R.id.subscribe) {
-//
-//
-//        }
+
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void showSubscription() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(NavigationActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.feedback, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(NavigationActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Send", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                       // youremail = (EditText) promptView.findViewById(R.id.youremailid);
+                        feedback = (EditText) promptView.findViewById(R.id.feedback);
+
+                           // String from = youremail.getText().toString();
+
+                            String message = feedback.getText().toString();
+
+                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+
+                            emailIntent.setData(Uri.parse("mailto:"));
+                           // emailIntent.setType("message/rfc822");
+                          //  emailIntent.putExtra(Intent.EXTRA_EMAIL, from);
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
+                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
+                            emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+
+                            try {
+
+                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                                    //finish();
+
+                            } catch (android.content.ActivityNotFoundException ex) {
+                                Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                            }
+
+                            // Toast.makeText(getApplication(), "Thank you", Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+//    private void sendEmail() {
+//        Log.i("Send email", "");
+//        String[] TO = {youremail.getText().toString()};
+//        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+//
+//        emailIntent.setData(Uri.parse("mailto:"));
+//        emailIntent.setType("text/plain");
+//        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+//
+//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
+//        emailIntent.putExtra(Intent.EXTRA_TEXT, feedback.getText().toString());
+//
+//        try {
+//            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//           // getActivity().finish();
+//            //  Log.i("Finished sending email...", "");
+//        } catch (android.content.ActivityNotFoundException ex) {
+//            Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+//        }
+
+
+   // }
 //
 
 
@@ -181,9 +267,23 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.things_todo) {
            // fragment = Frag1.getInstance("Catering");
 
-        } else if (id == R.id.nav_send) {
-            //fragment = Frag1.getInstance("Catering");
+        }
+        else if (id == R.id.rateus) {
+           // showInputDialog();
+            FiveStarsDialog fiveStarsDialog = new FiveStarsDialog(this,"angelo.gallarello@gmail.com");
+            fiveStarsDialog.setRateText("Your custom text")
+                    .setTitle("Your custom title")
+                    .setForceMode(true)
 
+                    .setUpperBound(2) // Market opened if a rating >= 2 is selected
+                    .setNegativeReviewListener(this) // OVERRIDE mail intent for negative review
+                    .setReviewListener(this) // Used to listen for reviews (if you want to track them )
+                    .showAfter(0);
+
+        }
+        else if(id == R.id.feedback){
+
+            showSubscription();
         }
         if(fragment!=null)
         {
@@ -198,5 +298,14 @@ public class NavigationActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onNegativeReview(int i) {
+
     }
+
+    @Override
+    public void onReview(int i) {
+
+    }
+}
 
