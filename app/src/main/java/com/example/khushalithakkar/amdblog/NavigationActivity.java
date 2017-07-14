@@ -67,8 +67,7 @@ public class NavigationActivity extends AppCompatActivity
                 int id = item.getItemId();
                 switch (id){
                     case R.id.homenav:
-//                        Intent i = new Intent(this,NavigationFragment.class);
-//                        startActivity(i);
+
                         fragment = new NavigationFragment();
                         break;
                     case R.id.flavofamd:
@@ -90,17 +89,6 @@ public class NavigationActivity extends AppCompatActivity
                 return true;
             }
         });
-
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                        .setAction("Action", null).show();
-//                shareIt();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -165,7 +153,7 @@ public class NavigationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void showSubscription() {
+    private void showFeedback() {
 
         LayoutInflater layoutInflater = LayoutInflater.from(NavigationActivity.this);
         final View promptView = layoutInflater.inflate(R.layout.feedback, null);
@@ -176,32 +164,24 @@ public class NavigationActivity extends AppCompatActivity
                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                       // youremail = (EditText) promptView.findViewById(R.id.youremailid);
+
                         feedback = (EditText) promptView.findViewById(R.id.feedback);
 
-                           // String from = youremail.getText().toString();
 
                             String message = feedback.getText().toString();
-
                             Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-
                             emailIntent.setData(Uri.parse("mailto:"));
-                           // emailIntent.setType("message/rfc822");
-                          //  emailIntent.putExtra(Intent.EXTRA_EMAIL, from);
-                        emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
                             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
                             emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 
                             try {
-
                                     startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                                     //finish();
 
                             } catch (android.content.ActivityNotFoundException ex) {
                                 Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
                             }
-
-                            // Toast.makeText(getApplication(), "Thank you", Toast.LENGTH_LONG).show();
 
                     }
                 })
@@ -216,30 +196,57 @@ public class NavigationActivity extends AppCompatActivity
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
-//    private void sendEmail() {
-//        Log.i("Send email", "");
-//        String[] TO = {youremail.getText().toString()};
-//        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-//
-//        emailIntent.setData(Uri.parse("mailto:"));
-//        emailIntent.setType("text/plain");
-//        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-//
-//        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
-//        emailIntent.putExtra(Intent.EXTRA_TEXT, feedback.getText().toString());
-//
-//        try {
-//            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-//           // getActivity().finish();
-//            //  Log.i("Finished sending email...", "");
-//        } catch (android.content.ActivityNotFoundException ex) {
-//            Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
-//        }
+    private void showSubscription() {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(NavigationActivity.this);
+        final View promptView = layoutInflater.inflate(R.layout.subscription, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(NavigationActivity.this);
+        alertDialogBuilder.setView(promptView);
+
+        alertDialogBuilder.setCancelable(false)
+                .setPositiveButton("Subscribe", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
 
-   // }
-//
+                        EditText email = (EditText) promptView.findViewById(R.id.emailid);
 
+
+                        String emailId = email.getText().toString();
+                        if (email.equals(""))
+                            email.setError("Please enter email Address");
+//                        else if (!email.contains("@") || !email.contains("."))
+//                            email.setError("Please enter a valid email Address");
+                        else
+                            Toast.makeText(getApplication(), "Thank You for Subscribe.", Toast.LENGTH_SHORT).show();
+
+//                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+//                        emailIntent.setData(Uri.parse("mailto:"));
+//                        emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
+//                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
+//                        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+
+                        try {
+                           // startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                            //finish();
+
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+        // create an alert dialog
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -283,7 +290,16 @@ public class NavigationActivity extends AppCompatActivity
         }
         else if(id == R.id.feedback){
 
+            showFeedback();
+        }
+        else if(id == R.id.subscribe){
+
             showSubscription();
+        }
+        else if (id == R.id.contactus) {
+
+            fragment= new ContactExpandableListView();
+
         }
         if(fragment!=null)
         {

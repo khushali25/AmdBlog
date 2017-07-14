@@ -1,6 +1,7 @@
 package com.example.khushalithakkar.amdblog;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,9 +40,11 @@ public class ImageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int i) {
         ImageView mImageView = new ImageView(mContext);
         mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
         mImageView.setImageResource(sliderImagesId[i]);
         ((ViewPager) container).addView(mImageView, 0);
         return mImageView;
+
     }
 
     @Override

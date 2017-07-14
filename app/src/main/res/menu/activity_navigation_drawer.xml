@@ -30,11 +30,11 @@
         <menu>
 
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/aboutus"
                 android:icon="@drawable/about"
                 android:title="About Us" />
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/contactus"
                 android:icon="@drawable/contact"
                 android:title="Contact Us" />
 
