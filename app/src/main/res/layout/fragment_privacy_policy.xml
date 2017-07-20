@@ -2,18 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.khushalithakkar.amdblog.AboutUsFragment">
+    tools:context="com.example.khushalithakkar.amdblog.PrivacyPolicyFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="About Us"
+        android:layout_height="match_parent"
+        android:text="Privacy Policy"
+        android:paddingLeft="120dp"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/colorAccent"
-        android:gravity="center"/>
-
+        android:paddingTop="20dp"/>
 
 </FrameLayout>

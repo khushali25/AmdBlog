@@ -46,6 +46,7 @@ public class PostDetailFragment extends Fragment {
         YouTubePlayerSupportFragment youTubePlayerFragment = YouTubePlayerSupportFragment.newInstance();
 
 
+
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.add(R.id.youtube_layout, youTubePlayerFragment).commit();
         youTubePlayerFragment.initialize(API_KEY, new YouTubePlayer.OnInitializedListener() {

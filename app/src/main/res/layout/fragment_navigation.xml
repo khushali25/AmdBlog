@@ -7,7 +7,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/backk"
     tools:context="com.example.khushalithakkar.amdblog.NavigationActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frcontentnavfrag">
 
+    </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -116,6 +121,7 @@
 
             </LinearLayout>
         </RelativeLayout>
+
     </ScrollView>
 
 </RelativeLayout>

@@ -1,12 +1,8 @@
 package com.example.khushalithakkar.amdblog;
 
 import android.content.Intent;
-import android.graphics.Color;
 
 import android.widget.BaseExpandableListAdapter;
-import java.util.HashMap;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -19,15 +15,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by Khushali Thakkar on 7/13/2017.
@@ -204,25 +191,5 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter  {
     public void onGroupExpanded(int groupPosition) {
 
     }
-
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//        GoogleMap mMap;
-//        mMap = googleMap;
-//        LatLng sydney = new LatLng(23.0225,72.5714);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Ahmedabad"));
-//        mMap.setMinZoomPreference(8);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//    }
-
-//    @Override
-//    public void registerDataSetObserver(DataSetObserver observer) {
-//
-//    }
-//
-//    @Override
-//    public void unregisterDataSetObserver(DataSetObserver observer) {
-//
-//    }
 
 }

@@ -41,7 +41,7 @@ public class NavigationActivity extends AppCompatActivity
     private FragmentManager fragmentManager;
     private PopupMenu popupMenu;
     EditText feedback;
-   // EditText youremail;
+    // EditText youremail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,31 +61,52 @@ public class NavigationActivity extends AppCompatActivity
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         fragmentManager = getSupportFragmentManager();
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
+                Fragment fragment1 = null;
                 switch (id){
+
                     case R.id.homenav:
+                        fragment1 = new NavigationFragment();
 
-                        fragment = new NavigationFragment();
                         break;
+
                     case R.id.flavofamd:
-                        fragment = new FlavAmdavadFragment();
-                        break;
-                    case R.id.newsamd:
-                        fragment = new FlavAmdavadFragment();
-                        break;
-                    case R.id.exploreamd:
-                        fragment = new FlavAmdavadFragment();
-                        break;
-                    case R.id.thingsamd:
-                        fragment = new FlavAmdavadFragment();
+                        fragment1  = new FlavAmdavadFragment();
+
                         break;
 
+                    case R.id.newsamd:
+                        fragment1 = new NewsFragment();
+
+                        break;
+
+                    case R.id.exploreamd:
+                       fragment1 = new ExploreAmdavadFragment();
+
+                        break;
+
+                    case R.id.thingsamd:
+                      fragment1 = new ThingsFragment();
+                        break;
                 }
-                final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.add(R.id.frcontent,fragment).commit();
+                if(fragment1!=null)
+                {
+                    FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+                    ft.add(R.id.frcontent,fragment1);
+                    //getFragmentManager().popBackStack();
+                    ft.addToBackStack("frcontent");
+                    if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                        getSupportFragmentManager().popBackStackImmediate();
+                    }
+
+                    ft.commit();
+                }
+//                final FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                transaction.replace(R.id.frcontent,fragment).commit();
                 return true;
             }
         });
@@ -100,7 +121,7 @@ public class NavigationActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Intent intent = new Intent(NavigationActivity.this, MainActivity.class);
-       // startActivity(intent);
+        // startActivity(intent);
         NavigationFragment nf = new NavigationFragment();
         android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frcontent, nf);
@@ -109,7 +130,7 @@ public class NavigationActivity extends AppCompatActivity
 
 
     private void shareIt() {
-    //sharing implementation here
+        //sharing implementation here
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amdavad Blogs");
@@ -121,8 +142,14 @@ public class NavigationActivity extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);}
+            if(fragmentManager.getBackStackEntryCount() > 0)
+            {
+                fragmentManager.popBackStack();
+
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         } else {
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             super.onBackPressed();
         }
     }
@@ -168,20 +195,20 @@ public class NavigationActivity extends AppCompatActivity
                         feedback = (EditText) promptView.findViewById(R.id.feedback);
 
 
-                            String message = feedback.getText().toString();
-                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                            emailIntent.setData(Uri.parse("mailto:"));
-                            emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
-                            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
-                            emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+                        String message = feedback.getText().toString();
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL,new String[] {"admin_amdavadblogs.com"});
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Amdavad Blog Feedback");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 
-                            try {
-                                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                                    //finish();
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                            //finish();
 
-                            } catch (android.content.ActivityNotFoundException ex) {
-                                Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
-                            }
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(getApplication(), "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 })
@@ -226,7 +253,7 @@ public class NavigationActivity extends AppCompatActivity
 //                        emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 
                         try {
-                           // startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                            // startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                             //finish();
 
                         } catch (android.content.ActivityNotFoundException ex) {
@@ -259,11 +286,26 @@ public class NavigationActivity extends AppCompatActivity
 
 
         if (id == R.id.home) {
-            Intent intent=new Intent(this,NavigationActivity.class);
-            startActivity(intent);
+            NavigationFragment navfra = new NavigationFragment();
+            android.app.FragmentManager fm = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent,navfra,"fragA");
+            ft.addToBackStack("AddFragA");
+            ft.commit();
+
 
         } else if (id == R.id.flav_amdavad) {
-            fragment= new FlavAmdavadFragment();
+            FlavAmdavadFragment flavfrag = new FlavAmdavadFragment();
+            android.app.FragmentManager fm3 = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent,flavfrag,"fragB");
+            ft.addToBackStack("AddFragB");
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+
+            ft.commit();
+
 
         } else if (id == R.id.news_cat) {
             //fragment = Frag1.getInstance("Catering");
@@ -272,11 +314,11 @@ public class NavigationActivity extends AppCompatActivity
             //fragment = Frag1.getInstance("Catering");
 
         } else if (id == R.id.things_todo) {
-           // fragment = Frag1.getInstance("Catering");
+            // fragment = Frag1.getInstance("Catering");
 
         }
         else if (id == R.id.rateus) {
-           // showInputDialog();
+            // showInputDialog();
             FiveStarsDialog fiveStarsDialog = new FiveStarsDialog(this,"angelo.gallarello@gmail.com");
             fiveStarsDialog.setRateText("Your custom text")
                     .setTitle("Your custom title")
@@ -298,16 +340,66 @@ public class NavigationActivity extends AppCompatActivity
         }
         else if (id == R.id.contactus) {
 
-            fragment= new ContactExpandableListView();
+            ContactExpandableListView confrag = new ContactExpandableListView();
+            android.app.FragmentManager fm = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            //fm.popBackStack("AddFragA",0);
 
-        }
-        if(fragment!=null)
-        {
-            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.frcontent,fragment);
-            ft.addToBackStack(fragment.getClass().getName());
+            ft.replace(R.id.frcontent,confrag,"fragC");
+            ft.addToBackStack("AddFragD");
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+               getSupportFragmentManager().popBackStackImmediate();
+            }
+           // fm.popBackStack();
             ft.commit();
         }
+        else if (id == R.id.aboutus) {
+
+            AboutUsFragment abtfrag = new AboutUsFragment();
+            android.app.FragmentManager fm1 = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent,abtfrag,"fragD");
+            ft.addToBackStack("AddFragC");
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+
+            ft.commit();
+        }
+        else if (id == R.id.privacypolicy) {
+
+            PrivacyPolicyFragment prifrag = new PrivacyPolicyFragment();
+            android.app.FragmentManager fm1 = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent,prifrag,"fragE");
+            ft.addToBackStack("AddFragE");
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+
+            ft.commit();
+        }
+        else if (id == R.id.advertisement) {
+
+           AdvertisementFragment adver = new AdvertisementFragment();
+            android.app.FragmentManager fm1 = getFragmentManager();
+            android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frcontent,adver,"fragF");
+            ft.addToBackStack("AddFragF");
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0){
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+
+            ft.commit();
+        }
+//        if(fragment!=null)
+//        {
+//            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+//            ft.add(R.id.frcontent,fragment);
+//            //getFragmentManager().popBackStack();
+//            ft.addToBackStack(fragment.getClass().getName());
+//            ft.commit();
+//        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -324,4 +416,3 @@ public class NavigationActivity extends AppCompatActivity
 
     }
 }
-
