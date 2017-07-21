@@ -285,7 +285,7 @@ public class NavigationActivity extends AppCompatActivity
         Fragment fragment=null;
 
 
-        if (id == R.id.home) {
+        if (id == R.id.home1) {
             NavigationFragment navfra = new NavigationFragment();
             android.app.FragmentManager fm = getFragmentManager();
             android.support.v4.app.FragmentTransaction ft= getSupportFragmentManager().beginTransaction();

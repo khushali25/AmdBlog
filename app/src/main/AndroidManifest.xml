@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".FbApplication"
@@ -17,14 +17,11 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".PostDetail" />
         <activity
             android:name=".NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,14 +33,24 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
 
-        <activity android:name=".ActivityMap"
+        <activity
+            android:name=".ActivityMap"
             android:hardwareAccelerated="true"
-            android:largeHeap="true"/>
+            android:largeHeap="true" />
 
-            <meta-data android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyDLFxt24oVOxfxIDAqUcFQ5Ypjx4mhCI7g" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDLFxt24oVOxfxIDAqUcFQ5Ypjx4mhCI7g" />
 
-
+        <activity android:name=".ActivityForPostFragment"
+            android:hardwareAccelerated="true"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.example.khushalithakkar.amdblog.NavigationActivity"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.khushalithakkar.amdblog.NavigationActivity" />
+        </activity>
     </application>
 
 </manifest>

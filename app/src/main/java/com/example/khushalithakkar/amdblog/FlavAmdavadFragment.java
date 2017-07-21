@@ -95,11 +95,8 @@ public class FlavAmdavadFragment extends Fragment {
 //            Intent intent = new Intent(getActivity(),PostDetail.class);
 //            startActivity(intent);
 
-            PostDetailFragment pf = new PostDetailFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.frcontent,pf,"PostDetailFragment");
-            ft.addToBackStack("PostDetailFragment");
-            ft.commit();
+            Intent i = new Intent(getActivity(),ActivityForPostFragment.class);
+            startActivity(i);
         }
     }
 

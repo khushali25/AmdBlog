@@ -141,14 +141,8 @@ public class NavigationFragment extends Fragment{
 //            Intent intent = new Intent(getActivity(),PostDetail.class);
 //            startActivity(intent);
 
-            PostDetailFragment pf = new PostDetailFragment();
-           // FragmentManager fm5 = getFragmentManager();
-            android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.frcontent,pf,"PostDetailFragment");
-            //ft.addToBackStack("PostDetailFragmentA");
-            //fm5.popBackStack("AddFragB",0);
-            ft.addToBackStack("PostDetailFragment");
-            ft.commit();
+            Intent i = new Intent(getActivity(),ActivityForPostFragment.class);
+            startActivity(i);
 
 //            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 //            fragmentManager.beginTransaction().add(R.id.frcontent, pf).commit();

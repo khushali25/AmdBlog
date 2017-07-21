@@ -1,6 +1,7 @@
 package com.example.khushalithakkar.amdblog;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -80,11 +81,8 @@ public class ThingsFragment extends Fragment {
 //            Intent intent = new Intent(getActivity(),PostDetail.class);
 //            startActivity(intent);
 
-            PostDetailFragment pf = new PostDetailFragment();
-            FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.add(R.id.frcontent,pf,"PostDetailFragment");
-            ft.addToBackStack("PostDetailFragment");
-            ft.commit();
+            Intent i = new Intent(getActivity(),ActivityForPostFragment.class);
+            startActivity(i);
         }
     }
 
